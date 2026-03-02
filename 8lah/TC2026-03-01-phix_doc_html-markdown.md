@@ -1,7 +1,7 @@
 # 令和8年3月1日
 **Phix.1.0.5.KB0000001.ja_jp**: Phix 独自ドキュメントソース (カスタム HTML) 型式から汎用 Markdown 型式への変換方法
 
-TBA
+TBA (執筆中)
 
 ## おおまかな流れ
 
@@ -31,9 +31,12 @@ TBA
         <col style="width: 5%"/>
 ```
 
-削除すれば通るようにはなりますが、テーブルは残ったままになるので考えものです。
+現在、このタグを使っているファイルは[こちら](https://github.com/search?q=repo%3Apetelomax%2FPhix+<col&type=code&p=1)です。削除すれば通るようにはなりますが、テーブルは残ったままになるので考えものです(対策は後ほど)。このタグ以外にも追加修正しないと正常に変換できないコトがあります。Pandoc変換後は必ず内容の照合をしましょう。
 
 * Latin-1 文字の混入
+
+iconv や nkf で対処しましょう。
+
 ``` bash
 ~/.../phix/html $ for f in *.htm; do pandoc -f html "$f" -t plain -o "${f%.htm}.txt"; done
 [WARNING] IupCells.htm is not UTF-8 encoded: falling back to latin1.
