@@ -1,4 +1,4 @@
-# Phix 1.05 documents (Converted to Markdown format)
+# Phix 1.0.5 documents (Converted to Markdown format)
 
 * Convertion method (in japanese): TBA
 
