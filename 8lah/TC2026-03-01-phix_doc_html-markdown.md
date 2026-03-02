@@ -1,5 +1,5 @@
 # 令和8年3月1日
-**Phix.1.05.KB0000001.ja_jp**: Phix 独自ドキュメントソース (カスタム HTML) 型式から汎用 Markdown 型式への変換方法
+**Phix.1.0.5.KB0000001.ja_jp**: Phix 独自ドキュメントソース (カスタム HTML) 型式から汎用 Markdown 型式への変換方法
 
 TBA
 
@@ -22,9 +22,35 @@ TBA
 
 ここまで一年から二年です。大変な思いをしますが、お賃金はでません。
 
-## 判明している不具合
+## 判明している不具合 (v.1.0.5)
 
-* pandoc では a32Colour.htm などは正常に変換できない(ウェブブラウザでは正常に表示できる)。Another-Lint, Tidy で調べる限りと HTML の書き方がおかしいのが理由です。もしかすると table タグまわりがおかしいのかもしれません。
+* pandoc では a32Colour.htm などは正常に変換できない(ウェブブラウザでは正常に表示できる)。Another-Lint, Tidy で調べる限りと HTML の書き方がおかしいのが理由です。もしかすると table タグまわりがおかしいのかもしれません。ちゃんと規格準拠させてPandocで通るようにするには大規模改修になります。
+
+* Latin-1 文字の混入
+``` bash
+~/.../phix/html $ for f in *.htm; do pandoc -f html "$f" -t plain -o "${f%.htm}.txt"; done
+[WARNING] IupCells.htm is not UTF-8 encoded: falling back to latin1.
+[WARNING] IupColorBrowser.htm is not UTF-8 encoded: falling back to latin1.
+[WARNING] IupColorbar.htm is not UTF-8 encoded: falling back to latin1.
+[WARNING] IupHide.htm is not UTF-8 encoded: falling back to latin1.
+[WARNING] IupImageLibOpen.htm is not UTF-8 encoded: falling back to latin1.
+[WARNING] IupListDialog.htm is not UTF-8 encoded: falling back to latin1.
+[WARNING] IupMatrixEx.htm is not UTF-8 encoded: falling back to latin1.
+[WARNING] IupPlot.htm is not UTF-8 encoded: falling back to latin1.
+[WARNING] IupSetAttribute.htm is not UTF-8 encoded: falling back to latin1.
+[WARNING] IupTree.htm is not UTF-8 encoded: falling back to latin1.
+[WARNING] a32dgeom.htm is not UTF-8 encoded: falling back to latin1.
+[WARNING] bigatom.htm is not UTF-8 encoded: falling back to latin1.
+[WARNING] callbacks.htm is not UTF-8 encoded: falling back to latin1.
+[WARNING] enter_cs.htm is not UTF-8 encoded: falling back to latin1.
+[WARNING] glFrustum.htm is not UTF-8 encoded: falling back to latin1.
+[WARNING] glRotate.htm is not UTF-8 encoded: falling back to latin1.
+[WARNING] glScale.htm is not UTF-8 encoded: falling back to latin1.
+[WARNING] glTranslate.htm is not UTF-8 encoded: falling back to latin1.
+[WARNING] gospec.htm is not UTF-8 encoded: falling back to latin1.
+[WARNING] regex.e.htm is not UTF-8 encoded: falling back to latin1.
+[WARNING] regex_syntax.htm is not UTF-8 encoded: falling back to latin1.
+```
 
 ## 関連
 
