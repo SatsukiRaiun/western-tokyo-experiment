@@ -1,11 +1,11 @@
 # 令和8年3月1日
 **Phix.1.0.5.KB0000001.ja_jp**: Phix 独自ドキュメントソース (カスタム HTML) 型式から汎用 Markdown 型式への変換方法
 
-TBA (執筆中)
+TBA (執筆中・草稿案)
 
 ## おおまかな流れ
 
-1. makephix.exw 形式の英語版ドキュメントソースコードをテキストファイルへ変換 (sed)
+1. makephix.exw 形式の英語版ドキュメントソースコードをテキストファイルへ変換 (pandoc/sed/grep)
 2. テキストファイルの手動整形
 3. スペルチェッカーで誤字脱字を修正します。
 4. Markdown ファイルへの変換とマークアップ復元
@@ -33,9 +33,8 @@ TBA (執筆中)
 
 現在、このタグを使っているファイルは[こちら](https://github.com/search?q=repo%3Apetelomax%2FPhix+<col&type=code&p=1)です。削除すれば通るようにはなりますが、テーブルは残ったままになるので考えものです(対策は後ほど)。このタグ以外にも追加修正しないと正常に変換できないコトがあります。Pandoc変換後は必ず内容の照合をしましょう。
 
-* Latin-1 文字の混入
-
-iconv や nkf で対処しましょう。
+* Latin-1 文字や絵文字などの異種文字コードの混入
+iconv や nkf で UTF-8へ変換しても対処しましょう。
 
 ``` bash
 ~/.../phix/html $ for f in *.htm; do pandoc -f html "$f" -t plain -o "${f%.htm}.txt"; done
@@ -61,6 +60,12 @@ iconv や nkf で対処しましょう。
 [WARNING] regex.e.htm is not UTF-8 encoded: falling back to latin1.
 [WARNING] regex_syntax.htm is not UTF-8 encoded: falling back to latin1.
 ```
+
+* Markdown に変換すると元の HTML ファイルと同じ禁則処理にならない
+
+pandoc では --wrap=preserve オプションを指定することで HTML ファイルの禁則処理のまま変換します。
+
+このプロジェクトでは英語版 html との整合性を保つために、このオプションの指定をしてください。整合性のないものをMarkdownに変換してプルリクエストで出されてもリジェクトします。今のところ日本語版は特に指定はありませんが、同じルールを適用するかもしれません。
 
 ## 関連
 
