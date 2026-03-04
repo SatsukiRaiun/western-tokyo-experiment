@@ -71,6 +71,10 @@ iconv や nkf で UTF-8へ変換しても対処しましょう。
 
 pandoc では --wrap=preserve オプションを指定することで HTML ファイルの禁則処理のまま変換します。
 
+``` bash
+pandoc --wrap=preserve -f html filename.htm -t markdown -o filename.md
+```
+
 このプロジェクトでは英語版 html との整合性を保つために、このオプションの指定をしてください。整合性のないものをMarkdownに変換してプルリクエストで出されてもリジェクトします。今のところ日本語版は特に指定はありませんが、同じルールを適用するかもしれません。
 
 ## 関連
